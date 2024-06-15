@@ -5,14 +5,18 @@ function ToDoList() {
     const [tasks, setTasks] = useState(["Eat breakfast","Take a shower","walk the dog"]);
     const [newTasks, setNewTasks] = useState("");
 
-    function handlezinputChange(event) {
+    function handleinputChange(event) {
         setNewTasks(event.target.value)
     }
     function addTask() {
-        
+        if (newTasks.trim() !== "") {
+            setTasks(t => [...t,newTasks]);
+        setNewTasks("");
+        }
     }
     function deleteTasks(index) {
-        
+        const updatedTasks = tasks.filter((_,i) => i !== index);
+        setTasks(updatedTasks);
     }
     function moveTaskUp(index) {
         
@@ -27,7 +31,7 @@ function ToDoList() {
             <div>
                 <input type="text" placeholder='Enter the task...' 
                 value={newTasks} 
-                onChange={handlezinputChange} />
+                onChange={handleinputChange} />
                 <button className="add-button" onClick={addTask}>
                     
                     Add
